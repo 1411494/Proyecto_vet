@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+<h:head>
+
+</h:head>
+<h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+<h:outputScript  name="js/bootstrap.js"/>
+<h:body>
+
+    <b:container  >
+
+            <div class="panel panel-primary">
+                <div class="panel-heading"  >
+                    <ui:include src="header.xhtml"/>
+                </div>
+                <div class="panel-body">
+                    <ui:insert name="content">
+                        Default Content
+                    </ui:insert>
+                </div>
+                <div class="panel-footer">
+                    <ui:include src="footer.xhtml"/>
+                </div>
+            </div>
+    </b:container>
+
+</h:body>
+</html>

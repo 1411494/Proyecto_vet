@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+
+</h:head>
+<h:body>
+
+    <ui:composition template="./index.xhtml">
+        <ui:define name="content">
+            <h:form id="fmrPersonAction">
+                <f:view>
+
+                    <div class="panel panel-primary" style="width: 500px">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Person Action</h3>
+                    </div>
+                    <div class="panel-body">
+                    <b:container layout="fluid">
+
+                        <b:row >
+                            <b:column span="2"><h:outputText value="ID: "/></b:column>
+                            <b:column span="2"><h:inputText value="#{hrservice.pet.pet_id}"/></b:column>
+                        </b:row>
+                        <div style="height: 5px">&nbsp;</div>
+                        <b:row >
+                            <b:column span="2"><h:outputText value="DNI: "/></b:column>
+                            <b:column span="2"><h:inputText value="#{hrservice.pet.dni}"/></b:column>
+                        </b:row>
+                        <div style="height: 5px">&nbsp;</div>
+                        <b:row >
+                            <b:column span="2"><h:outputText value="Pet Name: "/></b:column>
+                            <b:column span="2"><h:inputText value="#{hrservice.pet.pet_name}"/></b:column>
+                        </b:row>
+                        <div style="height: 5px">&nbsp;</div>
+                        <b:row >
+                            <b:column span="2"><h:outputText value="Breed: "/></b:column>
+                            <b:column span="2"><h:inputText value="#{hrservice.pet.breed}"/></b:column>
+                        </b:row>
+                        <div style="height: 5px">&nbsp;</div>
+                        <b:row >
+                            <b:column span="2"><h:outputText value="Hair color: "/></b:column>
+                            <b:column span="2"><h:inputText value="#{hrservice.pet.hair_color}"/></b:column>
+                        </b:row>
+                        <div style="height: 5px">&nbsp;</div>
+                        <b:row >
+                            <b:column span="2"><h:outputText value="Birth date: "/></b:column>
+                            <b:column span="2"><h:inputText value="#{hrservice.pet.birth_date}"/></b:column>
+                        </b:row>
+                        <div style="height: 5px">&nbsp;</div>
+                        <b:row >
+                            <b:column span="2"><h:outputText value="Status: "/></b:column>
+                            <b:column span="2"><h:inputText value="#{hrservice.pet.status}"/></b:column>
+                        </b:row>
+                        <div style="height: 5px">&nbsp;</div>
+
+                     </b:container>
+                    </div>
+                    </div>
+
+                </f:view>
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

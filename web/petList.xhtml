@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+
+</h:head>
+<h:body>
+
+    <ui:composition template="./index.xhtml">
+        <ui:define name="content">
+            <h:form id="fmrPersonAction">
+                <f:view>
+                    <h:commandLink value="Add Pet"
+                                   actionListener="#{hrservice.getPetNew()}"
+                                   action="petAction"
+                                   styleClass="btn btn-primary"/>
+
+                    <h:dataTable id="tablePet" value="#{hrservice.getPetListByDni()}"
+                                 var="petItems"
+                                 styleClass="table  table-striped table-hover ">
+
+                    <h:column headerClass="bg-primary">
+                        <f:facet name="header">ID</f:facet>
+                        #{petItems.pet_id}
+                    </h:column >
+                        <h:column headerClass="bg-primary">
+                            <f:facet name="header">DNI</f:facet>
+                            #{petItems.dni}
+                        </h:column >
+
+                        <h:column headerClass="bg-primary">
+                            <f:facet name="header">Name</f:facet>
+                            #{petItems.pet_name}
+                        </h:column >
+
+                        <h:column headerClass="bg-primary">
+                            <f:facet name="header">Breed</f:facet>
+                            #{petItems.breed}
+                        </h:column >
+
+                        <h:column headerClass="bg-primary">
+                            <f:facet name="header">Hair color</f:facet>
+                            #{petItems.hair_color}
+                        </h:column >
+
+                        <h:column headerClass="bg-primary">
+                            <f:facet name="header">Birth date</f:facet>
+                            #{petItems.birth_date}
+                        </h:column >
+
+                        <h:column headerClass="bg-primary">
+                            <f:facet name="header">Age</f:facet>
+                            #{petItems.age_year}
+                        </h:column >
+
+                        <h:column headerClass="bg-primary">
+                            <f:facet name="header">Month</f:facet>
+                            #{petItems.age_month}
+                        </h:column >
+                        <h:column headerClass="bg-primary">
+                            <f:facet name="header">Day</f:facet>
+                            #{petItems.age_day}
+                        </h:column >
+                        <h:column headerClass="bg-primary">
+                            <f:facet name="header">Status</f:facet>
+                            #{petItems.status}
+                        </h:column >
+
+                        <h:column headerClass="bg-primary">
+                            <f:facet name="header">Action</f:facet>
+                            <h:commandLink value="Edit"
+                                           actionListener="#{hrservice.petEdit(petItems)}"
+                                           action="petAction">
+
+                            </h:commandLink>
+                        </h:column >
+
+                    </h:dataTable>
+
+                </f:view>
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

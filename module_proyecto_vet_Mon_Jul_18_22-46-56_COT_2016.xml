@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_proyecto_vet" default="compile.module.proyecto_vet">
+  <dirname property="module.proyecto_vet.basedir" file="${ant.file.module_proyecto_vet}"/>
+  
+  <property name="module.jdk.home.proyecto_vet" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.proyecto_vet" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.proyecto_vet" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.proyecto_vet" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="proyecto_vet.output.dir" value="${module.proyecto_vet.basedir}/out/production/Proyecto_vet"/>
+  <property name="proyecto_vet.testoutput.dir" value="${module.proyecto_vet.basedir}/out/test/Proyecto_vet"/>
+  
+  <path id="proyecto_vet.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="proyecto_vet.module.production.classpath">
+    <path refid="${module.jdk.classpath.proyecto_vet}"/>
+    <path refid="library.glassfish_4.1.0_-_jsf.classpath"/>
+    <path refid="library.glassfish_4.1.0.classpath"/>
+  </path>
+  
+  <path id="proyecto_vet.runtime.production.module.classpath">
+    <pathelement location="${proyecto_vet.output.dir}"/>
+  </path>
+  
+  <path id="proyecto_vet.module.classpath">
+    <path refid="${module.jdk.classpath.proyecto_vet}"/>
+    <pathelement location="${proyecto_vet.output.dir}"/>
+    <path refid="library.glassfish_4.1.0_-_jsf.classpath"/>
+    <path refid="library.glassfish_4.1.0.classpath"/>
+  </path>
+  
+  <path id="proyecto_vet.runtime.module.classpath">
+    <pathelement location="${proyecto_vet.testoutput.dir}"/>
+    <pathelement location="${proyecto_vet.output.dir}"/>
+    <path refid="library.glassfish_4.1.0_-_jsf.classpath"/>
+    <path refid="library.glassfish_4.1.0.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.proyecto_vet">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.proyecto_vet">
+    <patternset refid="excluded.from.module.proyecto_vet"/>
+  </patternset>
+  
+  <path id="proyecto_vet.module.sourcepath">
+    <dirset dir="${module.proyecto_vet.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.proyecto_vet" depends="compile.module.proyecto_vet.production,compile.module.proyecto_vet.tests" description="Compile module Proyecto_vet"/>
+  
+  <target name="compile.module.proyecto_vet.production" depends="register.custom.compilers" description="Compile module Proyecto_vet; production classes">
+    <mkdir dir="${proyecto_vet.output.dir}"/>
+    <javac2 destdir="${proyecto_vet.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.proyecto_vet}/javac">
+      <compilerarg line="${compiler.args.proyecto_vet}"/>
+      <bootclasspath refid="proyecto_vet.module.bootclasspath"/>
+      <classpath refid="proyecto_vet.module.production.classpath"/>
+      <src refid="proyecto_vet.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.proyecto_vet"/>
+    </javac2>
+    
+    <copy todir="${proyecto_vet.output.dir}">
+      <fileset dir="${module.proyecto_vet.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.proyecto_vet.tests" depends="register.custom.compilers,compile.module.proyecto_vet.production" description="compile module Proyecto_vet; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.proyecto_vet" description="cleanup module">
+    <delete dir="${proyecto_vet.output.dir}"/>
+    <delete dir="${proyecto_vet.testoutput.dir}"/>
+  </target>
+</project>

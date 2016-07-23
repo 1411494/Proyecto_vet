@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+</h:head>
+<h:body>
+    <ui:composition template="./index.xhtml">
+        <ui:define name="content">
+
+            <f:view>
+                <h:form id="frmPersonsList">
+
+                    <table>
+                        <tr valign="baseline">
+                            <td width="700px">
+                                <h:commandLink value="Add Person"
+                                               actionListener="#{hrservice.getPersonNew()}"
+                                               action="personAction"
+                                               styleClass="btn btn-primary"/></td>
+                            <td width="10px"></td>
+                            <td width="300px">
+                                <b:inputText placeholder="Type something here..." value="#{hrservice.searchBy}"/>
+                            </td>
+                            <td width="10px"></td>
+                            <td><h:commandLink value="Search"
+                                               action="personList"
+                                               styleClass="btn btn-success"/></td>
+                        </tr>
+                    </table>
+
+                    <h:dataTable id="tablePersons" value="#{hrservice.personsList}"
+                                 var="personItems"
+                                 styleClass="table  table-striped table-hover "
+                                >
+
+                        <h:column headerClass="bg-primary">
+                            <f:facet name="header">DNI</f:facet>
+                            #{personItems.dni}
+                        </h:column >
+                        <h:column headerClass="bg-primary">
+                            <f:facet name="header">First name</f:facet>
+                            #{personItems.first_name}
+                        </h:column>
+                        <h:column headerClass="bg-primary">
+                            <f:facet name="header">Last name</f:facet>
+                            #{personItems.last_name}
+                        </h:column>
+                        <h:column headerClass="bg-primary">
+                            <f:facet name="header">E-mail</f:facet>
+                            #{personItems.email}
+                        </h:column>
+                        <h:column headerClass="bg-primary">
+                            <f:facet name="header">Address</f:facet>
+                            #{personItems.address}
+                        </h:column>
+                        <h:column headerClass="bg-primary">
+                            <f:facet name="header">Phone number</f:facet>
+                            #{personItems.phone_number}
+                        </h:column>
+                        <h:column headerClass="bg-primary">
+                            <f:facet name="header">Birth date</f:facet>
+                            #{personItems.birth_date}
+                        </h:column>
+                        <h:column headerClass="bg-primary">
+                            <f:facet name="header">Status</f:facet>
+                            #{personItems.status}
+                        </h:column>
+
+                        <h:column headerClass="bg-primary">
+                            <f:facet name="header">Action</f:facet>
+                            <h:commandLink value="Edit"
+                                           actionListener="#{hrservice.personEdit(personItems)}"
+                                           action="personAction">
+
+                            </h:commandLink>
+                        </h:column>
+                        <h:column headerClass="bg-primary">
+                            <f:facet name="header">User</f:facet>
+                            <h:commandLink value="View" action="#">
+
+                            </h:commandLink>
+                        </h:column>
+                        <h:column headerClass="bg-primary">
+                            <f:facet name="header">Pet</f:facet>
+                            <h:commandLink value="View"
+                                           actionListener="#{hrservice.getPetList(personItems)}"
+                                           action="petList">
+
+                            </h:commandLink>
+                        </h:column>
+                    </h:dataTable>
+
+                </h:form>
+            </f:view>
+
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

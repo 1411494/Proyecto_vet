@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-ear" name="Proyecto_vet:ear exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/Proyecto_vet_ear_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="Proyecto_vet/javaeeApplication/javaEEApplication" />
+      <element id="directory" name="web.war">
+        <element id="artifact" artifact-name="Proyecto_vet:war exploded" />
+      </element>
+      <element id="directory" name="lib">
+        <element id="library" level="project" name="BootsFaces-OSP-0.9.1-dist" />
+      </element>
+    </root>
+  </artifact>
+</component>
