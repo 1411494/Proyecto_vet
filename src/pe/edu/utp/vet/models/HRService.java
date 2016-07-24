@@ -63,15 +63,6 @@ public class HRService {
      **************************************************************/
 
 
-        public  void    getUserNew()
-        {
-            userName = "";
-            userPassword="";
-          //  user = new User();
-           // user.setUser_name("");
-            //user.setPassword("");
-        }
-
     public  void setSearchByNew()
     {
         searchBy = "";
@@ -110,7 +101,14 @@ public class HRService {
 
     }
 
-
+    public  void    getUserNew()
+    {
+        userName = "";
+        userPassword="";
+        //  user = new User();
+        // user.setUser_name("");
+        //user.setPassword("");
+    }
     /**************************************************************
      * Person Actions
      **************************************************************/
