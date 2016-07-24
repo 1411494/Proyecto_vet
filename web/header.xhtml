@@ -7,20 +7,30 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
+<h:head>
+    <h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+    <h:outputScript name="js/bootstrap.js"/>
+</h:head>
 <h:body>
     <f:view>
+        <h:form>
 
-        <b:navBar brand="Brand" brandHref="index.xhtml" inverse="true"   >
-            <b:navbarLinks>
-                <b:navLink value="Person" href="personList.xhtml"></b:navLink>
-                <b:navLink value="Link" href="#"></b:navLink>
-                <b:navLink value="Link" href="#"></b:navLink>
+            <div style="width: 600px">
+                <b:navBar brand="Home" brandHref="index.xhtml">
+                    <b:navbarLinks>
+                        <b:navLink value="Quiénes somos" href="aboutUs.xhtml"></b:navLink>
+                        <b:navLink value="Servicios" href="servicesVet.xhtml"></b:navLink>
+                        <b:navLink value="Admin" href="personList.xhtml"></b:navLink>
 
-            </b:navbarLinks>
-        </b:navBar>
+                        <b:navCommandLink value="Login" actionListener="#{hrservice.getUserNew()}"
+                        href="userLogin.xhtml"/>
+                </b:navbarLinks>
+                </b:navBar>
+
+            </div>
 
 
-
+        </h:form>
     </f:view>
 </h:body>
 

@@ -14,7 +14,64 @@
         <ui:define name="content">
             <h:form id="fmrPersonAction">
                 <f:view>
-                    Vaccine List
+
+                    <div class="panel panel-info" >
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Vaccine</h3>
+                        </div>
+                    </div>
+
+                    <h:commandLink value="Add Vaccine"
+                                   actionListener="#{hrservice.getVaccineNew()}"
+                                   action="vaccineAction"
+                                   styleClass="btn btn-primary"/>
+                    <br/> <br/>
+
+
+                    <h:dataTable id="tablePet" value="#{hrservice.getVaccineListbyPetId()}"
+                                 var="vaccineItems"
+                                 styleClass="table  table-striped table-hover ">
+
+                    <h:column headerClass="bg-info">
+                        <f:facet name="header">ID</f:facet>
+                        #{vaccineItems.vaccine_id}
+                    </h:column>
+                    <h:column headerClass="bg-info">
+                        <f:facet name="header">Pet Id</f:facet>
+                        #{vaccineItems.pet_id}
+                    </h:column>
+                        <h:column headerClass="bg-info">
+                            <f:facet name="header">Date</f:facet>
+                            #{vaccineItems.date}
+                        </h:column>
+                        <h:column headerClass="bg-info">
+                            <f:facet name="header">Weight</f:facet>
+                            #{vaccineItems.weight}
+                        </h:column>
+                        <h:column headerClass="bg-info">
+                            <f:facet name="header">Disease</f:facet>
+                            #{vaccineItems.disease}
+                        </h:column>
+                        <h:column headerClass="bg-info">
+                            <f:facet name="header">Next date</f:facet>
+                            #{vaccineItems.next_date}
+                        </h:column>
+
+                        <h:column headerClass="bg-info">
+                            <f:facet name="header">Action</f:facet>
+                            <h:commandLink value="Edit"
+                                           actionListener="#{hrservice.vaccineEdit(vaccineItems)}"
+                                           action="vaccineAction">
+                            </h:commandLink>
+
+                        </h:column>
+
+                    </h:dataTable>
+                    <br/>
+
+                    <h:commandLink value="Go Back" action="petList"
+                                   styleClass="btn btn-default"></h:commandLink>
+
                 </f:view>
             </h:form>
 

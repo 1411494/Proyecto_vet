@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:body>
+
+    <ui:composition template="./index.xhtml">
+        <ui:define name="content">
+            <h:form id="fmrPersonAction">
+                <f:view>
+
+                    <table>
+                        <tr>
+                            <td>   <b:image value="resources/Images/7.jpg" width="450px"></b:image></td>
+                            <td>
+
+                                <b:tabView pills="true" contentStyle="border: 1px solid #ddd;padding:10px">
+                                    <b:tab title="Medicina Veterinaria">
+                                        <b:image value="resources/Images/3.jpg" width="500px"></b:image>
+                                    </b:tab>
+                                    <b:tab title="Baño y Corte">
+                                        <b:image value="resources/Images/8.png" width="350px"></b:image>
+                                    </b:tab>
+                                    <b:tab title="PetShop">
+                                        <b:image value="resources/Images/9.jpg" width="400px"></b:image>
+                                    </b:tab>
+                                    <b:tab title="Hospedaje">
+                                        <b:image value="resources/Images/10.jpeg" width="500px"></b:image>
+                                    </b:tab>
+
+                                </b:tabView>
+
+
+                            </td>
+                        </tr>
+                    </table>
+
+
+
+                </f:view>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

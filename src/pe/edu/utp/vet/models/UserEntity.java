@@ -43,6 +43,33 @@ public class UserEntity {
         return 0;
     }
 
+    public User getUserLogin(User user) {
+        if (connection == null) return null;
+        try {
+            String sql = "{call user_Login (?,?)}";
+            CallableStatement cst = connection.prepareCall(sql);
+            cst.setString("_user_name", user.getUser_name());
+            cst.setString("_password", user.getPassword());
+
+            cst.execute();
+            ResultSet rs = cst.getResultSet();
+
+            User users = new User();
+            while (rs.next()) {
+                users.setDni(rs.getString("dni"));
+                users.setUser_name(rs.getString("user_name"));
+                users.setPassword(rs.getString("password"));
+                users.setType(rs.getString("type"));
+                users.setStatus(rs.getBoolean("status"));
+            }
+            return users;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+
+    }
+
 
     public User getUserList_by_DNI(User user) {
 

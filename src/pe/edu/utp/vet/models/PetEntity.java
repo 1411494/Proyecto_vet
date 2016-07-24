@@ -33,7 +33,9 @@ public class PetEntity {
             cst.setString("_breed", pet.getBreed());
             cst.setString("_hair_color", pet.getHair_color());
 
-            java.sql.Date sqlDate = (java.sql.Date) pet.getBirth_date();
+            java.util.Date utilDate = new java.util.Date();
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+
             cst.setDate("_birth_date", sqlDate);
             cst.setBoolean("_status", pet.isStatus());
 

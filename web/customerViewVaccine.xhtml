@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:body>
+
+    <ui:composition template="./index.xhtml">
+        <ui:define name="content">
+            <h:form id="fmrPersonAction">
+
+                <h:dataTable id="tablePet" value="#{hrservice.getVaccineListbyPetId()}"
+                             var="vaccineItems"
+                             styleClass="table  table-striped table-hover ">
+
+                    <h:column headerClass="bg-info">
+                        <f:facet name="header">ID</f:facet>
+                        #{vaccineItems.vaccine_id}
+                    </h:column>
+                    <h:column headerClass="bg-info">
+                        <f:facet name="header">Pet Id</f:facet>
+                        #{vaccineItems.pet_id}
+                    </h:column>
+                    <h:column headerClass="bg-info">
+                        <f:facet name="header">Date</f:facet>
+                        #{vaccineItems.date}
+                    </h:column>
+                    <h:column headerClass="bg-info">
+                        <f:facet name="header">Weight</f:facet>
+                        #{vaccineItems.weight}
+                    </h:column>
+                    <h:column headerClass="bg-info">
+                        <f:facet name="header">Disease</f:facet>
+                        #{vaccineItems.disease}
+                    </h:column>
+                    <h:column headerClass="bg-info">
+                        <f:facet name="header">Next date</f:facet>
+                        #{vaccineItems.next_date}
+                    </h:column>
+
+
+                </h:dataTable>
+                <br/>
+
+                <h:commandLink value="Go Back" action="customerView"
+                               styleClass="btn btn-default"></h:commandLink>
+
+
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+
+
+</h:body>
+
+</html>

@@ -31,13 +31,14 @@ public class VaccineEntity {
             cst.setInt("_vaccine_id", vaccine.getVaccine_id());
             cst.setString("_pet_id", vaccine.getPet_id());
 
-            java.sql.Date sqlDate = (java.sql.Date) vaccine.getDate();
+            java.util.Date utilDate = new java.util.Date();
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+
             cst.setDate("_date", sqlDate);
             cst.setString("_weight", vaccine.getWeight());
             cst.setString("_disease", vaccine.getDisease());
 
-            java.sql.Date sqlDateNext = (java.sql.Date) vaccine.getNext_date();
-            cst.setDate("_next_date", sqlDateNext);
+            cst.setDate("_next_date", sqlDate);
 
             cst.execute();
             return 1;
@@ -50,7 +51,7 @@ public class VaccineEntity {
     }
 
 
-    public List<Vaccine> getVaccine_List_by_PetId(Vaccine vaccine) {
+    public List<Vaccine> getVaccine_List_by_PetId(String  _searchByPet) {
 
         List<Vaccine> vaccines = new ArrayList<>();
 
@@ -59,7 +60,7 @@ public class VaccineEntity {
         try {
             String sql = "{call vaccine_List_by_PetId (?)}";
             CallableStatement cst = connection.prepareCall(sql);
-            cst.setString("_pet_id", vaccine.getPet_id());
+            cst.setString("_pet_id", _searchByPet);
 
             cst.execute();
             ResultSet rs = cst.getResultSet();
@@ -72,6 +73,7 @@ public class VaccineEntity {
                 vaccine1.setDate(rs.getDate("date"));
                 vaccine1.setWeight(rs.getString("weight"));
                 vaccine1.setDisease(rs.getString("disease"));
+
                 vaccine1.setNext_date(rs.getDate("next_date"));
 
                 vaccines.add(vaccine1);
