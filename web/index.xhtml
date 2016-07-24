@@ -34,7 +34,20 @@
             </div>
             <div class="panel-body" style="height: 500px;">
                 <ui:insert name="content">
-                    <b:image value="resources/Images/1.jpg"></b:image>
+                    <b:carousel id="tiovivo" style="width:1103px" interval="2200">
+                        <b:carouselItem >
+                            <img src="resources/Images/12.jpg" alt="Valladolid" />
+                            <b:carouselCaption>
+                                <h3>Veterinaria</h3>
+                            </b:carouselCaption>
+                        </b:carouselItem>
+                        <b:carouselItem caption="Todos estan bienvenidos">
+                            <img src="resources/Images/13.jpg" alt="Valladolid"/>
+                        </b:carouselItem>
+                        <b:carouselItem caption="Te dejamos con una sonrisa feliz">
+                            <img src="resources/Images/14.jpg" alt="Valladolid"/>
+                        </b:carouselItem>
+                    </b:carousel>
 
                 </ui:insert>
             </div>
