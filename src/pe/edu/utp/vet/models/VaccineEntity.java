@@ -4,6 +4,8 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,15 +32,16 @@ public class VaccineEntity {
             CallableStatement cst = connection.prepareCall(sql);
             cst.setInt("_vaccine_id", vaccine.getVaccine_id());
             cst.setString("_pet_id", vaccine.getPet_id());
-
-            java.util.Date utilDate = new java.util.Date();
-            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-
-            cst.setDate("_date", sqlDate);
             cst.setString("_weight", vaccine.getWeight());
             cst.setString("_disease", vaccine.getDisease());
 
-            cst.setDate("_next_date", sqlDate);
+            //Format to date
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            String _Date = dateFormat.format(vaccine.getDate());
+            String _NextDate = dateFormat.format(vaccine.getNext_date());
+
+            cst.setString("_date", _Date);
+            cst.setString("_next_date", _NextDate);
 
             cst.execute();
             return 1;

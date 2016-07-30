@@ -102,14 +102,15 @@
   <!-- Application Server Libraries -->
   
   <path id="library.glassfish_4.1.0.classpath">
-    <pathelement location="C:/Program Files/glassfish-4.1.0/glassfish/modules/javax.ejb-api.jar"/>
-    <pathelement location="C:/Program Files/glassfish-4.1.0/glassfish/modules/javax.servlet-api.jar"/>
-    <pathelement location="C:/Program Files/glassfish-4.1.0/glassfish/modules/javax.servlet.jsp.jstl-api.jar"/>
-    <pathelement location="C:/Program Files/glassfish-4.1.0/glassfish/modules/javax.servlet.jsp.jstl.jar"/>
+    <pathelement location="C:/Program Files/glassfish4/glassfish/modules/javax.ejb-api.jar"/>
+    <pathelement location="C:/Program Files/glassfish4/glassfish/modules/javax.servlet-api.jar"/>
+    <pathelement location="C:/Program Files/glassfish4/glassfish/modules/javax.servlet.jsp-api.jar"/>
+    <pathelement location="C:/Program Files/glassfish4/glassfish/modules/javax.servlet.jsp.jstl-api.jar"/>
+    <pathelement location="C:/Program Files/glassfish4/glassfish/modules/javax.servlet.jsp.jstl.jar"/>
   </path>
   
   <path id="library.glassfish_4.1.0_-_jsf.classpath">
-    <pathelement location="C:/Program Files/glassfish-4.1.0/glassfish/modules/javax.faces.jar"/>
+    <pathelement location="C:/Program Files/glassfish4/glassfish/modules/javax.faces.jar"/>
   </path>
   <!-- Register Custom Compiler Taskdefs -->
   <property name="javac2.home" value="${idea.home}/lib"/>

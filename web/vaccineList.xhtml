@@ -2,6 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
@@ -15,59 +16,99 @@
             <h:form id="fmrPersonAction">
                 <f:view>
 
-                    <div class="panel panel-info" >
+                    <div class="panel panel-success">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Vaccine</h3>
+                            <h3 class="panel-title">Admin: #{hrservice.user.user_name} /
+                                <h:commandLink value="Customer:" action="personList" actionListener="#{hrservice.setSearchByNew()}" />
+                                #{hrservice.person.first_name},
+                                #{hrservice.person.last_name} /
+                             <h:commandLink value="Pet:" action="petList"/>
+                                #{hrservice.pet.pet_name} /
+                                Vaccine </h3>
                         </div>
                     </div>
 
-                    <h:commandLink value="Add Vaccine"
-                                   actionListener="#{hrservice.getVaccineNew()}"
-                                   action="vaccineAction"
-                                   styleClass="btn btn-primary"/>
-                    <br/> <br/>
+
+                    <table  width="100%">
+                        <tr>
+                            <td valign="top" width="25%" >
+                                <div class="panel panel-primary" >
+                                    <div class="panel-heading"> #{hrservice.pet.pet_name}</div>
+                                    <div class="panel-body"  >
+                                        <b:image value="#{hrservice.pet.image}"
+                                                 tooltip="#{hrservice.pet.pet_name}"
+                                                 class="img-rounded"
+                                                  width="95%"/>
+
+                                        <br/><br/>
+                                        <h:outputText value="Name : "/>
+                                        <h:outputText value="#{hrservice.pet.pet_name}"/>
+                                        <br/>
+                                        <h:outputText value="Breed : "/>
+                                        <h:outputText value="#{hrservice.pet.breed}"/>
+                                        <br/>
+                                        <h:outputText value="Birth date : "/>
+                                        <h:outputText value="#{hrservice.pet.birth_date}"/>
+                                    </div>
+                                </div>
+
+                            </td>
+                            <td>&nbsp;</td>
+                            <td valign="top" width="74%"  >
+                                <h:commandLink value="Add Vaccine"
+                                               actionListener="#{hrservice.getVaccineNew()}"
+                                               action="vaccineAction"
+                                               styleClass="btn btn-primary"/>
+                                <br/><br/>
+
+                           <!--     <h:dataTable id="tablePet" value="#{hrservice.getVaccineListbyPetId()}"
+                                             var="vaccineItems"
+                                             styleClass="table  table-striped table-hover ">-->
+                                <div style="width: 80%">
+                                    <b:dataTable id="tablePet" value="#{hrservice.getVaccineListbyPetId()}"
+                                                 fixedHeader="true"
+                                                 scroll-size="400px"
+                                                 scroll-x="false"
+                                                 responsive="true"
+                                                 searching="false"
+                                                 var="vaccineItems"   >
+
+                                        <b:column headerClass="bg-info">
+                                            <f:facet name="header">ID</f:facet>
+                                            #{vaccineItems.vaccine_id}
+                                        </b:column>
+
+                                        <b:column headerClass="bg-info">
+                                            <f:facet name="header">Date</f:facet>
+                                            #{vaccineItems.date}
+                                        </b:column>
+                                        <b:column headerClass="bg-info">
+                                            <f:facet name="header">Weight</f:facet>
+                                            #{vaccineItems.weight}
+                                        </b:column>
+                                        <b:column headerClass="bg-info">
+                                            <f:facet name="header">Disease</f:facet>
+                                            #{vaccineItems.disease}
+                                        </b:column>
+                                        <b:column headerClass="bg-info">
+                                            <f:facet name="header">Next date</f:facet>
+                                            #{vaccineItems.next_date}
+                                        </b:column>
+
+                                        <h:column headerClass="bg-info">
+                                            <f:facet name="header">Action</f:facet>
+                                            <h:commandLink value="Edit"
+                                                           actionListener="#{hrservice.vaccineEdit(vaccineItems)}"
+                                                           action="vaccineAction">
+                                            </h:commandLink>
+                                        </h:column>
+                                    </b:dataTable>
+                                </div>
 
 
-                    <h:dataTable id="tablePet" value="#{hrservice.getVaccineListbyPetId()}"
-                                 var="vaccineItems"
-                                 styleClass="table  table-striped table-hover ">
-
-                    <h:column headerClass="bg-info">
-                        <f:facet name="header">ID</f:facet>
-                        #{vaccineItems.vaccine_id}
-                    </h:column>
-                    <h:column headerClass="bg-info">
-                        <f:facet name="header">Pet Id</f:facet>
-                        #{vaccineItems.pet_id}
-                    </h:column>
-                        <h:column headerClass="bg-info">
-                            <f:facet name="header">Date</f:facet>
-                            #{vaccineItems.date}
-                        </h:column>
-                        <h:column headerClass="bg-info">
-                            <f:facet name="header">Weight</f:facet>
-                            #{vaccineItems.weight}
-                        </h:column>
-                        <h:column headerClass="bg-info">
-                            <f:facet name="header">Disease</f:facet>
-                            #{vaccineItems.disease}
-                        </h:column>
-                        <h:column headerClass="bg-info">
-                            <f:facet name="header">Next date</f:facet>
-                            #{vaccineItems.next_date}
-                        </h:column>
-
-                        <h:column headerClass="bg-info">
-                            <f:facet name="header">Action</f:facet>
-                            <h:commandLink value="Edit"
-                                           actionListener="#{hrservice.vaccineEdit(vaccineItems)}"
-                                           action="vaccineAction">
-                            </h:commandLink>
-
-                        </h:column>
-
-                    </h:dataTable>
-                    <br/>
+                            </td>
+                        </tr>
+                    </table>
 
                     <h:commandLink value="Go Back" action="petList"
                                    styleClass="btn btn-default"></h:commandLink>

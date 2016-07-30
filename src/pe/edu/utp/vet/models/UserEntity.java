@@ -43,13 +43,13 @@ public class UserEntity {
         return 0;
     }
 
-    public User getUserLogin(User user) {
+    public User getUserLogin(User _user) {
         if (connection == null) return null;
         try {
             String sql = "{call user_Login (?,?)}";
             CallableStatement cst = connection.prepareCall(sql);
-            cst.setString("_user_name", user.getUser_name());
-            cst.setString("_password", user.getPassword());
+            cst.setString("_user_name", _user.getUser_name());
+            cst.setString("_password", _user.getPassword());
 
             cst.execute();
             ResultSet rs = cst.getResultSet();

@@ -15,15 +15,11 @@
             <f:view>
                 <h:form id="frmPersonsList">
 
-                    <div class="panel panel-info" >
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Customer</h3>
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Admin: #{hrservice.user.user_name} / Person</h3>
+                        </div>
                     </div>
-                    </div>
-
-
-
-
 
                     <table>
                         <tr valign="baseline">
@@ -42,63 +38,64 @@
                                                styleClass="btn btn-success"/></td>
                         </tr>
                     </table>
+                    <br></br>
 
 
+                    <b:dataTable id="tablePerson" value="#{hrservice.personsList}"
+                                 fixedHeader="true"
+                                 scroll-size="400px"
+                                 scroll-x="false"
+                                 responsive="true"
+                                 searching="false"
+                                 var="personItems">
 
-                    <h:dataTable id="tablePersons" value="#{hrservice.personsList}"
-                                 var="personItems"
-                                 styleClass="table  table-striped table-hover "
-                                >
-
-                        <h:column headerClass="bg-info">
+                        <b:column headerClass="bg-info">
                             <f:facet name="header">DNI</f:facet>
                             #{personItems.dni}
-                        </h:column >
-                        <h:column headerClass="bg-info">
+                        </b:column>
+                        <b:column headerClass="bg-info">
                             <f:facet name="header">First name</f:facet>
                             #{personItems.first_name}
-                        </h:column>
-                        <h:column headerClass="bg-info">
+                        </b:column>
+                        <b:column headerClass="bg-info">
                             <f:facet name="header">Last name</f:facet>
                             #{personItems.last_name}
-                        </h:column>
-                        <h:column headerClass="bg-info">
+                        </b:column>
+                        <b:column headerClass="bg-info">
                             <f:facet name="header">E-mail</f:facet>
                             #{personItems.email}
-                        </h:column>
-                        <h:column headerClass="bg-info">
+                        </b:column>
+                        <b:column headerClass="bg-info">
                             <f:facet name="header">Address</f:facet>
                             #{personItems.address}
-                        </h:column>
-                        <h:column headerClass="bg-info">
+                        </b:column>
+                        <b:column headerClass="bg-info">
                             <f:facet name="header">Phone number</f:facet>
                             #{personItems.phone_number}
-                        </h:column>
-                        <h:column headerClass="bg-info">
+                        </b:column>
+                        <b:column headerClass="bg-info">
                             <f:facet name="header">Birth date</f:facet>
                             #{personItems.birth_date}
-                        </h:column>
-                        <h:column headerClass="bg-info">
+                        </b:column>
+                        <b:column headerClass="bg-info">
                             <f:facet name="header">Status</f:facet>
-                            #{personItems.status}
-                        </h:column>
+                            <b:selectBooleanCheckbox value="#{personItems.status}"
+                                                     onclick="return false;"/>
+                        </b:column>
 
                         <h:column headerClass="bg-info">
                             <f:facet name="header">Action</f:facet>
 
 
-
-
                             <h:commandLink value="Edit"
                                            actionListener="#{hrservice.personEdit(personItems)}"
-                                           action="personAction">   </h:commandLink>
+                                           action="personAction"> </h:commandLink>
 
 
                             &nbsp;
-                            <h:commandLink value="User" action="#">
-
-                            </h:commandLink>
-
+                            <h:commandLink value="User"
+                                           actionListener="#{hrservice.getUserEdit(personItems)}"
+                                           action="userAction"></h:commandLink>
                             &nbsp;
                             <h:commandLink value="Pet"
                                            actionListener="#{hrservice.getPetList(personItems)}"
@@ -108,10 +105,8 @@
 
                         </h:column>
 
+                    </b:dataTable>
 
-
-
-                    </h:dataTable>
 
                 </h:form>
             </f:view>

@@ -13,7 +13,7 @@ public class Pet {
     private String hair_color;
     private Date birth_date;
     private boolean status;
-
+    private String image;
 
     private String age_year;
     private String age_month;
@@ -98,5 +98,13 @@ public class Pet {
 
     public void setAge_day(String age_day) {
         this.age_day = age_day;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

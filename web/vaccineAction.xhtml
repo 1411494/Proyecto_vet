@@ -16,64 +16,78 @@
             <h:form id="fmrPersonAction">
                 <f:view>
 
-                    <div class="panel panel-primary" style="width: 500px">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Vaccine Action</h3>
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Admin: #{hrservice.user.user_name} /
+                                Customer: #{hrservice.person.first_name},
+                                #{hrservice.person.last_name} /
+                                Pet:#{hrservice.pet.pet_name} / Vaccine </h3>
+                        </div>
                     </div>
-                    <div class="panel-body">
 
-                        <b:container layout="fluid">
+                    <div class="panel panel-primary" style="width: 50%">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Vaccine Action</h3>
+                        </div>
+                        <div class="panel-body">
 
-                            <b:row >
-                                <b:column span="2"><h:outputText value="ID: "/></b:column>
-                                <b:column span="2"><h:inputText value="#{hrservice.vaccine.vaccine_id}"/></b:column>
-                            </b:row>
-                            <div style="height: 5px">&nbsp;</div>
-                            <b:row >
-                                <b:column span="2"><h:outputText value="Pet Id: "/></b:column>
-                                <b:column span="2"><h:inputText value="#{hrservice.vaccine.pet_id}"/></b:column>
-                            </b:row>
-                            <div style="height: 5px">&nbsp;</div>
-                            <b:row >
-                                <b:column span="2"><h:outputText value="Date: "/></b:column>
-                                <b:column span="2">
-                                    <b:datepicker value="#{hrservice.vaccine.date}"
-                                                  data-date-format="dd/mm/yyyy" /> </b:column>
-                            </b:row>
-                            <div style="height: 5px">&nbsp;</div>
-                            <b:row >
-                                <b:column span="2"><h:outputText value="Disease: "/></b:column>
-                                <b:column span="2"><h:inputText value="#{hrservice.vaccine.disease}"/></b:column>
-                            </b:row>
-                            <div style="height: 5px">&nbsp;</div>
-                            <b:row >
-                                <b:column span="2"><h:outputText value="Next date: "/></b:column>
-                                <b:column span="2">
-                                    <b:datepicker value="#{hrservice.vaccine.next_date}"
-                                                  data-date-format="dd/mm/yyyy" />
-                                     </b:column>
-                            </b:row>
+                            <table style="width: 70%">
+                                <tr>
+                                    <td><h:outputText value="ID: "/></td>
+                                    <td>&nbsp;&nbsp;</td>
+                                    <td>
+                                        <b:inputText value="#{hrservice.vaccine.vaccine_id}" readonly="true"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><h:outputText value="Pet Id: "/></td>
+                                    <td>&nbsp;&nbsp;</td>
+                                    <td>
+                                        <b:inputText value="#{hrservice.vaccine.pet_id}" readonly="true"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><h:outputText value="Disease: "/></td>
+                                    <td>&nbsp;&nbsp;</td>
+                                    <td>
+                                        <b:inputText value="#{hrservice.vaccine.disease}"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><h:outputText value="Date: "/></td>
+                                    <td>&nbsp;&nbsp;</td>
+                                    <td>
+                                        <b:datepicker value="#{hrservice.vaccine.date}"
+                                                      data-date-format="dd/mm/yyyy"/>
+                                    </td>
+                                </tr>
+                                <tr><td colspan="3" height="10px"  > </td></tr>
+                                <tr>
+                                    <td><h:outputText value="Next date: "/></td>
+                                    <td>&nbsp;&nbsp;</td>
+                                    <td>
+                                        <b:datepicker value="#{hrservice.vaccine.next_date}"
+                                                      data-date-format="dd/mm/yyyy"/>
+                                    </td>
+                                </tr>
+<tr><td colspan="3" height="10px"  > </td></tr>
+                                <tr>
+                                    <td>
+                                        <h:commandLink value="Go Back" action="vaccineList"
+                                                       styleClass="btn btn-default"></h:commandLink>
+                                    </td>
+                                    <td>&nbsp;</td>
+                                    <td>
+                                        <h:commandLink value="&nbsp; Save &nbsp;"
+                                                       actionListener="#{hrservice.getVaccineAction()}"
+                                                       action="vaccineList"
+                                                       styleClass="btn btn-success">
+                                        </h:commandLink>
+                                    </td>
+                                </tr>
+                            </table>
 
-
-                            <div style="height: 10px">&nbsp;
-
-                            </div>
-                            <b:row>
-                                <b:column span="2">
-                                    <h:commandLink value="Go Back" action="vaccineList"
-                                                   styleClass="btn btn-default"></h:commandLink>
-                                </b:column>
-                                <b:column span="1">
-                                    <h:commandLink value="&nbsp; Save &nbsp;"
-                                                   actionListener="#{hrservice.getVaccineAction()}"
-                                                   action="vaccineList"
-                                                   styleClass="btn btn-success">
-                                    </h:commandLink>
-                                </b:column>
-                            </b:row>
-                        </b:container>
-
-                            </div>
+                        </div>
                     </div>
 
                 </f:view>

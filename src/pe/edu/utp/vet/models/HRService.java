@@ -1,27 +1,23 @@
 package pe.edu.utp.vet.models;
 
-import com.oracle.jrockit.jfr.UseConstantPool;
-import com.sun.net.httpserver.Filter;
-import com.sun.org.apache.regexp.internal.RE;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.jws.soap.SOAPBinding;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-import java.awt.*;
+
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-import java.io.PrintWriter;
-import javax.swing.JOptionPane;
+import javax.servlet.http.*;
 
 
 /**
@@ -32,20 +28,23 @@ import javax.swing.JOptionPane;
 
 public class HRService {
 
-    /**************************************************************
-     * Var
-     **************************************************************/
+    //region VARIABLE_DECLARATION
 
     private Connection connection;
     private Vaccine vaccine;
     private Pet pet;
-    private String searchBy;
-    private String searchByPet;
-    private  String userName;
-    private  String userPassword;
     private User user;
+    private User userEdit;
     private Person person;
 
+    private String searchBy;
+    private String searchByPet;
+    private String userName;
+    private String userPassword;
+
+    //endregion;
+
+    //region HR_SERVICE
 
     public HRService() {
         try {
@@ -57,68 +56,18 @@ public class HRService {
         }
     }
 
+    //endregion;
 
-    /**************************************************************
-     * Person Actions
-     **************************************************************/
-
-
-        public  void    getUserNew()
-        {
-            userName = "";
-            userPassword="";
-          //  user = new User();
-           // user.setUser_name("");
-            //user.setPassword("");
-        }
-
-    public  void setSearchByNew()
-    {
-        searchBy = "";
-    }
-
-    public void getUserLogin( )
-    {
-        User UserLogin = new User();
-        UserLogin.setUser_name(userName);
-        UserLogin.setPassword(userPassword);
-
-       User _user=  getUserEntity().getUserLogin(UserLogin);
-        if(_user != null)
-        {
-            searchBy = _user.getDni();
-
-            if(person == null)
-                person = new Person();
-            // searchBy ="40102030";
-            List<Person> arrayList= getPersonEntity().getPersonsList(searchBy);
-
-            for (Person person1 : arrayList) {
-                if (person1.getDni().equals(searchBy)) {
-
-                    Person personView = new Person();
-                    personView.setDni(person1.getDni());
-                    personView.setFirst_name(person1.getFirst_name());
-                    personView.setLast_name(person1.getLast_name());
-
-                    setPerson(personView);
-                }
-            }
-
-            //  customerListByDni();
-        }
-
-    }
-
-
-    /**************************************************************
-     * Person Actions
-     **************************************************************/
+    //region ACTION_PERSON
 
     private PersonEntity getPersonEntity() {
         PersonEntity personEntity = new PersonEntity();
         personEntity.setConnection(getConnection());
         return personEntity;
+    }
+
+    public void getPersonNew() {
+        person = new Person();
     }
 
     public List<Person> getPersonsList() {
@@ -127,12 +76,7 @@ public class HRService {
             searchBy = "";
         }
 
-
         return getPersonEntity().getPersonsList(searchBy);
-    }
-
-    public void getPersonNew() {
-        person = new Person();
     }
 
     public void getPersonAction() {
@@ -159,21 +103,75 @@ public class HRService {
         }
     }
 
-    /**************************************************************
-     * Vaccine Actions
-     **************************************************************/
+    //endregion;
+
+    //region ACTION_PET
+
+    private PetEntity getPetEntity() {
+        PetEntity petEntity = new PetEntity();
+        petEntity.setConnection(connection);
+        return petEntity;
+    }
+
+    public void getPetNew() {
+        pet = new Pet();
+        pet.setImage("resources/Images/Pet/anonimoPet.jpg");
+        pet.setStatus(true);
+        pet.setDni(person.getDni());
+    }
+
+    public List<Pet> getPetListByDni() {
+        return getPetEntity().getPetListByDNI(searchBy);
+    }
+
+    public void getPetList(Person _person) {
+        searchBy = _person.getDni();
+        personEdit(_person);
+    }
+
+    public void petEdit(Pet _pet) {
+
+        List<Pet> arrayList = getPetListByDni();
+        for (Pet pet1 : arrayList) {
+            if (pet1.getPet_id().equals(_pet.getPet_id())) {
+                Pet petEdit = new Pet();
+                petEdit.setDni(pet1.getDni());
+                petEdit.setPet_id(pet1.getPet_id());
+                petEdit.setPet_name(pet1.getPet_name());
+                petEdit.setBreed(pet1.getBreed());
+                petEdit.setHair_color(pet1.getHair_color());
+                petEdit.setBirth_date(pet1.getBirth_date());
+                petEdit.setImage(pet1.getImage());
+                petEdit.setStatus(pet1.isStatus());
+
+                setPet(petEdit);
+            }
+        }
+    }
+
+    public void getPetAction() {
+
+        getPetEntity().getPetAction(pet);
+    }
+
+    //endregion;
+
+    //region ACTION_VACCINE
+
     private VaccineEntity getVaccineEntity() {
         VaccineEntity vaccineEntity = new VaccineEntity();
         vaccineEntity.setConnection(connection);
         return vaccineEntity;
     }
 
-    public  void  getVaccineNew()
-    {
-        vaccine= new Vaccine();
+    public void getVaccineNew() {
+        vaccine = new Vaccine();
+        vaccine.setPet_id(pet.getPet_id());
     }
+
     public void getVaccineList(Pet _pet) {
-        searchByPet =_pet.getPet_id();
+        searchByPet = _pet.getPet_id();
+        petEdit(_pet);
     }
 
     public List<Vaccine> getVaccineListbyPetId() {
@@ -187,7 +185,7 @@ public class HRService {
     public void vaccineEdit(Vaccine _vaccine) {
         List<Vaccine> arrayList = getVaccineListbyPetId();
         for (Vaccine vaccine1 : arrayList) {
-            if (vaccine1.getVaccine_id() ==_vaccine.getVaccine_id()) {
+            if (vaccine1.getVaccine_id() == _vaccine.getVaccine_id()) {
 
                 Vaccine vaccine1Edit = new Vaccine();
 
@@ -203,55 +201,9 @@ public class HRService {
         }
     }
 
-    /**************************************************************
-     * Pet Actions
-     **************************************************************/
-    private PetEntity getPetEntity() {
-        PetEntity petEntity = new PetEntity();
-        petEntity.setConnection(connection);
-        return petEntity;
-    }
+    //endregion;
 
-    public void getPetNew() {
-        pet = new Pet();
-    }
-
-    public List<Pet> getPetListByDni()
-    {
-        return getPetEntity().getPetListByDNI(searchBy);
-    }
-
-    public void getPetList(Person _person) {
-        searchBy =_person.getDni();
-    }
-
-    public void petEdit(Pet _pet) {
-
-        List<Pet> arrayList = getPetListByDni();
-        for (Pet pet1 : arrayList) {
-            if (pet1.getPet_id().equals(_pet.getPet_id())) {
-                Pet petEdit = new Pet();
-                petEdit.setDni(pet1.getDni());
-                petEdit.setPet_id(pet1.getPet_id());
-                petEdit.setPet_name(pet1.getPet_name());
-                petEdit.setBreed(pet1.getBreed());
-                petEdit.setHair_color(pet1.getHair_color());
-                petEdit.setBirth_date(pet1.getBirth_date());
-                petEdit.setStatus(pet1.isStatus());
-
-                setPet(petEdit);
-            }
-        }
-    }
-
-    public void getPetAction() {
-
-        getPetEntity().getPetAction(pet);
-    }
-
-    /**************************************************************
-     * User Actions
-     **************************************************************/
+    //region ACTION_USER
 
     private UserEntity getUserEntity() {
         UserEntity userEntity = new UserEntity();
@@ -264,14 +216,100 @@ public class HRService {
     }
 
     public void getUserAction() {
-        getUserEntity().getUserAction(user);
+        getUserEntity().getUserAction(userEdit);
     }
 
+    public void getUserEdit(Person _person) {
 
+        User _user = new User();
+        _user.setDni(_person.getDni());
 
+        _user = getUserList_by_DNI(_user);
 
+        if (_user.getDni().equals(_person.getDni())) {
+            User userEdit = new User();
+            userEdit.setDni(_user.getDni());
+            userEdit.setUser_name(_user.getUser_name());
+            userEdit.setPassword(_user.getPassword());
+            userEdit.setType(_user.getType());
+            userEdit.setStatus(_user.isStatus());
+            setUserEdit(userEdit);
+        } else {
+            _user.setDni(_person.getDni());
+            _user.setStatus(true);
+            setUserEdit(_user);
+        }
 
+    }
 
+    //endregion;
+
+    //region ACTION_USER_LOGIN
+
+    public void getUserNew() {
+        userName = "";
+        userPassword = "";
+        searchBy = "";
+        searchByPet = "";
+
+        userEdit = new User();
+    }
+
+    public void setSearchByNew() {
+        searchBy = "";
+    }
+
+    public void getUserLogin() {
+        ExternalContext ctx = FacesContext.getCurrentInstance().getExternalContext();
+
+        User UserLogin = new User();
+        UserLogin.setUser_name(userName);
+        UserLogin.setPassword(userPassword);
+
+        user = new User();
+        user = getUserEntity().getUserLogin(UserLogin);
+        if (user != null) {
+
+            if (person == null)
+                person = new Person();
+
+            searchBy = user.getDni();
+            List<Person> arrayList = getPersonEntity().getPersonsList(user.getDni());
+            for (Person person1 : arrayList) {
+                if (person1.getDni().equals(user.getDni())) {
+
+                    Person personView = new Person();
+                    personView.setDni(person1.getDni());
+                    personView.setFirst_name(person1.getFirst_name());
+                    personView.setLast_name(person1.getLast_name());
+                    personView.setPhone_number(person1.getPhone_number());
+                    personView.setAddress(person1.getAddress());
+                    setPerson(personView);
+                }
+            }
+
+            try {
+                if (person.getDni().length() > 0) {
+                    if (user.getType().equals("A")) //Administrador
+                    {
+                        searchBy = "";
+                        ctx.redirect("personList.xhtml");
+                    } else {
+                        ctx.redirect("customerView.xhtml");
+                    }
+
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+    //endregion;
+
+    //region PROPERTIES
 
     /**************************************************************
      * Connection
@@ -307,6 +345,16 @@ public class HRService {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public User getUserEdit() {
+
+        return userEdit;
+    }
+
+    public void setUserEdit(User userEdit) {
+
+        this.userEdit = userEdit;
     }
 
     /**************************************************************
@@ -366,4 +414,7 @@ public class HRService {
     public void setUserPassword(String userPassword) {
         this.userPassword = userPassword;
     }
+
+    //endregion;
+
 }

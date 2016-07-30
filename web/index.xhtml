@@ -7,43 +7,61 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
+<f:view>
 
-<h:head>
 
-</h:head>
-<h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
-<h:outputScript name="js/bootstrap.js"/>
-<h:outputScript name="js/bootstrap.min.js"/>
-<h:body >
+    <h:head>
+    </h:head>
+    <h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+    <h:outputScript name="js/bootstrap.js"/>
+    <h:outputScript name="js/bootstrap.min.js"/>
+    <h:body style="background-image: url(resources/Images/Textura.png)">
 
-    <b:container>
+        <b:container>
+            <!--    http://v4-alpha.getbootstrap.com/content/images/-->
+            <div class="panel panel-primary">
 
-        <div class="panel panel-primary">
 
-            <div>
+                <div>
 
-                <div class="panel-heading"
-                     style="background-image: url(resources/Images/Header.png);
-                     background-repeat: no-repeat
-                      ; background-size: 1140px 100px;
-                      "
-                                    >
+                    <div class="panel-heading"
+                         style="background-image: url(resources/Images/Header.jpg)
+                     ; background-repeat: no-repeat;
+                     background-size:   100% 100%;">
+                        <ui:include src="header.xhtml"/>
+                    </div>
+                </div>
 
-                    <ui:include src="header.xhtml"/>
+                <div class="panel-body" style="background-image: url(resources/Images/fondoBlanco.jpg)">
+                    <ui:insert name="content">
+                        <b:carousel id="tiovivo" style="width:100%" interval="2200">
+                            <b:carouselItem>
+                                <img src="resources/Images/Pets.jpg"
+                                     alt="Valladolid"/>
+                                <b:carouselCaption>
+                                    <h3>Vet</h3>
+                                </b:carouselCaption>
+                            </b:carouselItem>
+                            <b:carouselItem caption="All are welcome">
+                                <img src="resources/Images/PetCare.jpg"
+                                     alt="Valladolid"/>
+                            </b:carouselItem>
+                            <b:carouselItem caption="your pet care">
+                                <img src="resources/Images/VetPet.jpg"
+                                     alt="Valladolid"/>
+                            </b:carouselItem>
+                        </b:carousel>
+
+                    </ui:insert>
+                </div>
+
+                <div class="panel-footer" style="text-align: center">
+                    <ui:include src="footer.xhtml"/>
                 </div>
             </div>
-            <div class="panel-body" style="height: 500px;">
-                <ui:insert name="content">
-                    <b:image value="resources/Images/1.jpg"></b:image>
 
-                </ui:insert>
-            </div>
-            <div class="panel-footer" style="text-align: center">
-                <ui:include src="footer.xhtml"/>
-            </div>
-        </div>
+        </b:container>
 
-    </b:container>
-
-</h:body>
+    </h:body>
+</f:view>
 </html>
