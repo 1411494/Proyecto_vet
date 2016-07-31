@@ -2,6 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
@@ -14,7 +15,88 @@
         <ui:define name="content">
             <h:form id="fmrPersonAction">
                 <f:view>
-                    User Action
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Admin: #{hrservice.user.user_name} / User</h3>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-primary" style="width: 70%">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">User Action</h3>
+                        </div>
+
+                        <div class="panel-body">
+
+                             <table>
+                                 <tr>
+                                     <td valign="top" width="35%">
+                                         <b:image value="resources/Images/Customer/anonimoface.png"
+                                                  tooltip="#{hrservice.person.first_name}"
+                                                  class="img-rounded"
+                                                  width="100%"/>
+                                     </td>
+                                     <td width="5%">&nbsp; &nbsp; </td>
+                                     <td valign="top" width="80%">
+                                         <table>
+                                         <tr>
+                                             <td><h:outputText value="DNI: "/></td>
+                                             <td>&nbsp;&nbsp;</td>
+                                             <td>
+                                                 <b:inputText value="#{hrservice.userEdit.dni}" readonly="true"/>
+                                             </td>
+                                         </tr>
+                                             <tr>
+                                                 <td><h:outputText value="Name: "/></td>
+                                                 <td>&nbsp;&nbsp;</td>
+                                                 <td>
+                                                     <b:inputText value="#{hrservice.userEdit.user_name}"/>
+                                                 </td>
+                                             </tr>
+                                             <tr>
+                                                 <td><h:outputText value="Password: "/></td>
+                                                 <td>&nbsp;&nbsp;</td>
+                                                 <td>
+                                                     <b:inputText value="#{hrservice.userEdit.password}"/>
+                                                 </td>
+                                             </tr>
+                                             <tr>
+                                                 <td><h:outputText value="Type: "/></td>
+                                                 <td>&nbsp;&nbsp;</td>
+                                                 <td>
+                                                     <b:inputText value="#{hrservice.userEdit.type}"/>
+                                                     <h:outputText value="A: Adm / C: Customer"></h:outputText>
+                                                 </td>
+                                             </tr>
+                                             <tr>
+                                                 <td><h:outputText value="Status: "/></td>
+                                                 <td>&nbsp;&nbsp;</td>
+                                                 <td>
+                                                    <b:selectBooleanCheckbox value="#{hrservice.userEdit.status}"/>
+                                                 </td>
+                                             </tr>
+                                             <tr>
+                                                 <td>
+                                                     <h:commandLink value="Go Back" action="personList"
+                                                                    styleClass="btn btn-default"></h:commandLink>
+                                                 </td>
+                                                 <td>&nbsp;</td>
+                                                 <td>
+                                                     <h:commandLink value="&nbsp; Save &nbsp;"
+                                                                    actionListener="#{hrservice.getUserAction()}"
+                                                                    action="personList"
+                                                                    styleClass="btn btn-success"> </h:commandLink>
+                                                 </td>
+                                             </tr>
+                                         </table>
+
+                                     </td>
+                                 </tr>
+                             </table>
+                        </div>
+                    </div>
+
+
                 </f:view>
             </h:form>
 

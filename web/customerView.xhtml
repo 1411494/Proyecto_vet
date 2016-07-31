@@ -5,7 +5,7 @@
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"  >
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <ui:composition template="./index.xhtml">
     <ui:define name="content">
@@ -16,74 +16,109 @@
 
                 <div class="panel panel-info">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Welcome #{hrservice.person.first_name}</h3>
+                        <h3 class="panel-title">Welcome #{hrservice.person.first_name}, #{hrservice.person.last_name}</h3>
                     </div>
                 </div>
 
+                <table width="100%">
+                    <tr>
+                        <td   valign="top" width="25%">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">#{hrservice.person.first_name}, #{hrservice.person.last_name}</div>
+                                <div class="panel-body">
+                                    <b:image value="resources/Images/Customer/anonimoface.png"
+                                             tooltip="#{hrservice.person.first_name}"
+                                             class="img-rounded"
+                                             width="100%"/>
 
-                <h:dataTable id="tablePet" value="#{hrservice.getPetListByDni()}"
-                             var="petItems"
-                             styleClass="table  table-striped table-hover ">
+                                    <br/>
+                                    <h:outputText value="DNI : "/>
+                                    <h:outputText value="#{hrservice.person.dni}"/>
+                                    <br/>
+                                    <h:outputText value="Address : "/>
+                                    <h:outputText value="#{hrservice.person.address}"/>
+                                    <br/>
+                                    <h:outputText value="Phone : "/>
+                                    <h:outputText value="#{hrservice.person.phone_number}"/>
 
-                    <h:column headerClass="bg-info" >
-                        <f:facet name="header">ID</f:facet>
-                        #{petItems.pet_id}
-                    </h:column>
-                    <h:column headerClass="bg-info">
-                        <f:facet name="header">DNI</f:facet>
-                        #{petItems.dni}
-                    </h:column>
-
-                    <h:column headerClass="bg-info">
-                        <f:facet name="header">Name</f:facet>
-                        #{petItems.pet_name}
-                    </h:column>
-
-                    <h:column headerClass="bg-info">
-                        <f:facet name="header">Breed</f:facet>
-                        #{petItems.breed}
-                    </h:column>
-
-                    <h:column headerClass="bg-info">
-                        <f:facet name="header">Hair color</f:facet>
-                        #{petItems.hair_color}
-                    </h:column>
-
-                    <h:column headerClass="bg-info">
-                        <f:facet name="header">Birth date</f:facet>
-                        #{petItems.birth_date}
-                    </h:column>
-
-                    <h:column headerClass="bg-info">
-                        <f:facet name="header">Age</f:facet>
-                        #{petItems.age_year}
-                    </h:column>
-
-                    <h:column headerClass="bg-info">
-                        <f:facet name="header">Month</f:facet>
-                        #{petItems.age_month}
-                    </h:column>
-                    <h:column headerClass="bg-info">
-                        <f:facet name="header">Day</f:facet>
-                        #{petItems.age_day}
-                    </h:column>
-                    <h:column headerClass="bg-info">
-                        <f:facet name="header">Status</f:facet>
-                        #{petItems.status}
-                    </h:column>
-
-                    <h:column headerClass="bg-info">
-                        <f:facet name="header">Action</f:facet>
-                        <h:commandLink value="Vaccine"
-                                       actionListener="#{hrservice.getVaccineList(petItems)}"
-                                       action="customerViewVaccine">   </h:commandLink>
+                                </div>
+                            </div>
+                        </td>
+                        <td>&nbsp;</td>
+                        <td valign="top" width="73%" >
+                            <div style="width: 98%">
+                            <div class="panel panel-primary" style="width: 98%">
+                                <div class="panel-heading">Pets</div>
+                                <div class="panel-body">
+<!--
+                                    <h:dataTable id="tablePet" value="#{hrservice.getPetListByDni()}"
+                                                 var="petItems"
+                                                 styleClass="table  table-striped table-hover ">-->
+                                    <b:dataTable id="tablePet" value="#{hrservice.getPetListByDni()}"
+                                                 fixedHeader="true"
+                                                 scroll-size="400px"
+                                                 scroll-x="false"
+                                                 responsive="true"
+                                                 searching="true"
+                                                 var="petItems"   >
+                                        <b:column headerClass="bg-info">
+                                            <f:facet name="header">ID</f:facet>
+                                            #{petItems.pet_id}
+                                        </b:column>
 
 
-                    </h:column>
+                                        <b:column headerClass="bg-info">
+                                            <f:facet name="header">Name</f:facet>
+                                            #{petItems.pet_name}
+                                        </b:column>
 
-                </h:dataTable>
+                                        <b:column headerClass="bg-info">
+                                            <f:facet name="header">Breed</f:facet>
+                                            #{petItems.breed}
+                                        </b:column>
+
+                                        <b:column headerClass="bg-info">
+                                            <f:facet name="header">Hair color</f:facet>
+                                            #{petItems.hair_color}
+                                        </b:column>
+
+                                        <b:column headerClass="bg-info">
+                                            <f:facet name="header">Birth date</f:facet>
+                                            #{petItems.birth_date}
+                                        </b:column>
+
+                                        <b:column headerClass="bg-info">
+                                            <f:facet name="header">Age</f:facet>
+                                            #{petItems.age_year}
+                                        </b:column>
+
+                                        <b:column headerClass="bg-info">
+                                            <f:facet name="header">Month</f:facet>
+                                            #{petItems.age_month}
+                                        </b:column>
+                                        <b:column headerClass="bg-info">
+                                            <f:facet name="header">Day</f:facet>
+                                            #{petItems.age_day}
+                                        </b:column>
 
 
+                                        <h:column headerClass="bg-info">
+                                            <f:facet name="header">Action</f:facet>
+                                            <h:commandLink value="Vaccine"
+                                                           actionListener="#{hrservice.getVaccineList(petItems)}"
+                                                           action="customerViewVaccine"> </h:commandLink>
+
+
+                                        </h:column>
+
+                                    </b:dataTable>
+
+                                </div>
+                            </div>
+</div>
+                        </td>
+                    </tr>
+                </table>
 
 
             </h:form>

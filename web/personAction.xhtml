@@ -17,78 +17,103 @@
 
             <h:form id="fmrPersonAction">
 
-                <div class="panel panel-primary" style="width: 500px">
+                <div class="panel panel-success">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Person Action</h3>
-                    </div>
-                    <div class="panel-body">
-                        <b:container layout="fluid">
-
-                            <b:row >
-                                <b:column span="2"><h:outputText value="DNI: "/></b:column>
-                                <b:column span="2"><h:inputText value="#{hrservice.person.dni}"/></b:column>
-                            </b:row>
-                            <div style="height: 5px">&nbsp;</div>
-                            <b:row>
-                                <b:column span="2"><h:outputText value="First Name: "/></b:column>
-                                <b:column span="2"><h:inputText value="#{hrservice.person.first_name}"/></b:column>
-                            </b:row>
-                            <div style="height: 5px">&nbsp;</div>
-                            <b:row>
-                                <b:column span="2"><h:outputText value="Last Name: "/></b:column>
-                                <b:column span="2"><h:inputText value="#{hrservice.person.last_name}"/></b:column>
-                            </b:row>
-                            <div style="height: 5px">&nbsp;</div>
-                            <b:row>
-                                <b:column span="2"><h:outputText value="E-mail: "/></b:column>
-                                <b:column span="2"><h:inputText value="#{hrservice.person.email}"/></b:column>
-                            </b:row>
-                            <div style="height: 5px">&nbsp;</div>
-                            <b:row>
-                                <b:column span="2"><h:outputText value="Address: "/></b:column>
-                                <b:column span="2"><h:inputText value="#{hrservice.person.address}"/></b:column>
-                            </b:row>
-                            <div style="height: 5px">&nbsp;</div>
-                            <b:row>
-                                <b:column span="2"><h:outputText value="Phone Number: "/></b:column>
-                                <b:column span="2"><h:inputText value="#{hrservice.person.phone_number}"/></b:column>
-                            </b:row>
-                            <div style="height: 5px">&nbsp;</div>
-                            <b:row>
-                                <b:column span="2"><h:outputText value="Birth Date: "/></b:column>
-                                <b:column span="2">
-                                    <b:datepicker value="#{hrservice.person.birth_date}"
-                                                  data-date-format="dd/mm/yyyy" /></b:column>
-                            </b:row>
-                            <div style="height: 5px">&nbsp;</div>
-                            <b:row>
-                                <b:column span="2"><h:outputText value="Status: "/></b:column>
-                                <b:column span="2">
-                                    <b:selectBooleanCheckbox value="#{hrservice.person.status}" />
-                                </b:column>
-                            </b:row>
-                            <div style="height: 10px">&nbsp;
-
-                            </div>
-                            <b:row>
-                                <b:column span="2">
-                                    <h:commandLink value="Go Back" action="personList"
-                                                   styleClass="btn btn-default"></h:commandLink>
-                                </b:column>
-                                <b:column span="1">
-                                    <h:commandLink value="&nbsp; Save &nbsp;"
-                                                   actionListener="#{hrservice.getPersonAction()}"
-                                                   action="personList"
-                                                   styleClass="btn btn-success">
-                                    </h:commandLink>
-                                </b:column>
-                            </b:row>
-                        </b:container>
+                        <h3 class="panel-title">Admin: #{hrservice.user.user_name} / Customer</h3>
                     </div>
                 </div>
 
 
+                <div class="panel panel-primary" style="width: 70%">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Person Action</h3>
+                    </div>
+
+                    <div class="panel-body">
+
+                        <table width="100%">
+                            <tr>
+                                <td valign="top" width="35%">
+                                    <b:image value="resources/Images/Customer/anonimoface.png"
+                                             class="img-rounded"
+                                             tooltip="#{hrservice.person.first_name}"
+                                             width="100%"/>
+
+                                </td>
+                                <td width="5%">&nbsp; &nbsp; </td>
+                                <td valign="top" width="80%">
+                                    <table>
+                                        <tr>
+                                            <td><h:outputText value="DNI: "/></td>
+                                            <td>&nbsp;&nbsp;</td>
+                                            <td>
+                                                <b:inputText value="#{hrservice.person.dni}"/>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><h:outputText value="First Name: "/></td>
+                                            <td>&nbsp;</td>
+                                            <td><b:inputText value="#{hrservice.person.first_name}"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td><h:outputText value="Last Name: "/></td>
+                                            <td>&nbsp;</td>
+                                            <td><b:inputText value="#{hrservice.person.last_name}"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td><h:outputText value="E-mail: "/></td>
+                                            <td>&nbsp;</td>
+                                            <td><b:inputText value="#{hrservice.person.email}"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td><h:outputText value="Address: "/></td>
+                                            <td>&nbsp;</td>
+                                            <td><b:inputText value="#{hrservice.person.address}"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td><h:outputText value="Phone Number: "/></td>
+                                            <td>&nbsp;</td>
+                                            <td><b:inputText value="#{hrservice.person.phone_number}"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td><h:outputText value="Birth Date: "/></td>
+                                            <td>&nbsp;</td>
+                                            <td>
+                                                <b:datepicker value="#{hrservice.person.birth_date}"/></td>
+
+                                        </tr>
+                                        <tr>
+                                            <td><h:outputText value="Status: "/></td>
+                                            <td>&nbsp;</td>
+                                            <td><b:selectBooleanCheckbox value="#{hrservice.person.status}"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <h:commandLink value="Go Back" action="personList"
+                                                               styleClass="btn btn-default"></h:commandLink>
+                                            </td>
+                                            <td>&nbsp;</td>
+                                            <td>
+                                                <h:commandLink value="&nbsp; Save &nbsp;"
+                                                               actionListener="#{hrservice.getPersonAction()}"
+                                                               action="personList"
+                                                               styleClass="btn btn-success"> </h:commandLink>
+                                            </td>
+                                        </tr>
+
+                                    </table>
+
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+
+                </div>
+
             </h:form>
+
 
         </ui:define>
     </ui:composition>

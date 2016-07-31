@@ -1,11 +1,11 @@
 package pe.edu.utp.vet.models;
 
 
-
 import javax.faces.convert.Converter;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -77,14 +77,11 @@ public class PersonEntity {
             cst.setString("_address", person.getAddress());
             cst.setString("_phone_number", person.getPhone_number());
 
-            java.util.Date utilDate = new java.util.Date();
+            //Format to date
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            String _birthDate = dateFormat.format(person.getBirth_date());
 
-            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-     //       SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-       //    java.sql.Date sqlDate2= null;
-         //   sqlDate2 = (java.sql.Date)df. parse("1988/07/16" );
-
-           cst.setDate( "_birth_date", sqlDate);
+            cst.setString("_birth_date", _birthDate);
             cst.setBoolean("_status", person.isStatus());
 
             cst.execute();
